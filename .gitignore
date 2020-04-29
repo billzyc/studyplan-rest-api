@@ -137,4 +137,4 @@ eb-package.zip
 static/
 
 .DS_Store
-course_planner/course_planner_secrets/secrets_file.py
+course_planner/course_planner_secrets/
