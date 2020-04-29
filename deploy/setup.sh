@@ -6,6 +6,8 @@ set -e
 
 PROJECT_GIT_URL='https://github.com/billzyc/studyplan-rest-api.git'
 
+PROJECT_SECRET_URL='https://github.com/billzyc/course_planner_secrets.git'
+
 PROJECT_BASE_PATH='/usr/local/apps/course-planner-rest-api'
 
 echo "Installing dependencies..."
@@ -23,6 +25,11 @@ python3 -m venv $PROJECT_BASE_PATH/env
 # Install python packages
 $PROJECT_BASE_PATH/env/bin/pip3 install -r $PROJECT_BASE_PATH/requirements.txt
 $PROJECT_BASE_PATH/env/bin/pip3 install uwsgi==2.0.18
+
+# Clone secrets folder
+
+cd $PROJECT_BASE_PATH/course_planner
+git clone $PROJECT_SECRET_URL
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
