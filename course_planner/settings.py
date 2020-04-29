@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-from .course_planner_secrets.secrets_file import *
+# Place secret_key in ./course_planner_secretssecrets_file to run locally
+from .course_planner_secrets.secrets_file import secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ SECRET_KEY = secret_key
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = [
-    'ec2-3-23-100-151.us-east-2.compute.amazonaws.com', '127.0.0.1']
+    'ec2-18-216-208-125.us-east-2.compute.amazonaws.com', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
