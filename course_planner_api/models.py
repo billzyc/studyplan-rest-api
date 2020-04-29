@@ -51,3 +51,21 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """return string of user"""
         return self.email
+
+
+class CourseItem(models.Model):
+    """Database model for course items"""
+
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+    )
+    course_subject = models.CharField(max_length=10)
+    course_number = models.IntegerField()
+    year_placement = models.IntegerField(blank=True, null=True)
+    semester_placement = models.CharField(max_length=2, blank=True, null=True)
+    reqs = JSONField(blank=True, null=True)
+    semester_offered = JSONField(blank=True, null=True)
+
+    def __str__(self):
+        """Return model as course number"""
+        return f"{self.course_subject}-{self.course_number}"
