@@ -15,6 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "password",
             "required_courses",
             "current_academic_term",
+            "study_terms"
         )
         extra_kwargs = {
             "password": {"write_only": True, "style": {"input_type": "password"}}
@@ -49,8 +50,7 @@ class CourseItemSerializer(serializers.ModelSerializer):
             "user_profile",
             "course_subject",
             "course_number",
-            "semester_placement",
-            "year_placement",
+            "term_placement",
             "reqs",
             "semester_offered",
         )

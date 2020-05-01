@@ -39,6 +39,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     required_courses = JSONField(blank=True, null=True)
+    study_terms = JSONField(blank=True, null=True)
     current_academic_term = models.CharField(
         max_length=3, blank=True, null=True)
     is_staff = models.BooleanField(default=False)
@@ -61,8 +62,7 @@ class CourseItem(models.Model):
     )
     course_subject = models.CharField(max_length=10)
     course_number = models.IntegerField()
-    year_placement = models.IntegerField(blank=True, null=True)
-    semester_placement = models.CharField(max_length=2, blank=True, null=True)
+    term_placement = models.CharField(max_length=10, blank=True, null=True)
     reqs = JSONField(blank=True, null=True)
     semester_offered = JSONField(blank=True, null=True)
 
