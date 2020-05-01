@@ -25,7 +25,7 @@ SECRET_KEY = secret_key
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = [
-    'ec2-18-216-208-125.us-east-2.compute.amazonaws.com', '127.0.0.1']
+    'ec2-18-188-30-63.us-east-2.compute.amazonaws.com', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
