@@ -65,14 +65,20 @@ class UserCourseItemViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieves saved course info for logged in user"""
         queryset = self.queryset
+        semester_query = self.request.query_params.get('semester_query')
         if self.request.user.is_staff:
             return queryset
-        try:
-            query_set = queryset.filter(
-                user_profile=self.request.user, semester_placement__semester__contains=self.request.data["semester_query"])
-        except KeyError:
-            query_set = queryset.filter(
-                user_profile=self.request.user)
+        else:
+            if(semester_query):
+                if 'unassigned' in semester_query:
+                    query_set = queryset.filter(
+                        user_profile=self.request.user, semester_placement=None)
+                else:
+                    print(52)
+                    query_set = queryset.filter(
+                        user_profile=self.request.user, semester_placement=semester_query)
+            else:
+                query_set = queryset.filter(user_profile=self.request.user)
         return query_set
 
     def perform_create(self, serializer):

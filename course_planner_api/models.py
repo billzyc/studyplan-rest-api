@@ -61,7 +61,7 @@ class SemesterGroup(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
     )
 
-    semester = models.CharField(max_length=10)
+    semester = models.CharField(max_length=50)
 
     def __str__(self):
         """Return model as course number"""

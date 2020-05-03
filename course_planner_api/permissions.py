@@ -1,7 +1,8 @@
 from rest_framework import permissions
+from rest_framework.permissions import BasePermission
 
 
-class UpdateUserProfile(permissions.BasePermission):
+class UpdateUserProfile(BasePermission):
     """allows users to edit profile"""
 
     def has_object_permission(self, request, view, obj):
@@ -12,7 +13,7 @@ class UpdateUserProfile(permissions.BasePermission):
             return obj.id == request.user.id
 
 
-class UpdateSemesterGroup(permissions.BasePermission):
+class UpdateSemesterGroup(BasePermission):
     """allows users to edit semester info"""
 
     def has_object_permission(self, request, view, obj):
@@ -24,7 +25,7 @@ class UpdateSemesterGroup(permissions.BasePermission):
             return obj.user_profile.email == request.user.email
 
 
-class UpdateCourseItem(permissions.BasePermission):
+class UpdateCourseItem(BasePermission):
     """allows users to edit course list"""
 
     def has_object_permission(self, request, view, obj):
