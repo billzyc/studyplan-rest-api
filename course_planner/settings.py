@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-# Place secret_key in ./course_planner_secretssecrets_file to run locally
+# Place secret_key in ./course_planner_secrets/secrets_file to run locally
 from .course_planner_secrets.secrets_file import secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
