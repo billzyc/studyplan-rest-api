@@ -41,7 +41,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class SemesterGroupSerializer(serializers.ModelSerializer):
-    """Serializers course information"""
+    """Serializes a semester"""
 
     class Meta:
         model = models.SemesterGroup
@@ -54,7 +54,7 @@ class SemesterGroupSerializer(serializers.ModelSerializer):
 
 
 class CourseItemSerializer(serializers.ModelSerializer):
-    """Serializers course information"""
+    """Serializes a course"""
 
     class Meta:
         model = models.CourseItem

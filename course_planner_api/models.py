@@ -24,7 +24,7 @@ class UserProfileManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, name, password):
-        """create a super user"""
+        """Create a super user"""
         user = self.create_user(email, name, password)
         user.is_superuser = True
         user.is_staff = True
@@ -55,7 +55,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
 
 class SemesterGroup(models.Model):
-    """Database model for semester"""
+    """Database model for semester groups"""
 
     user_profile = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
@@ -64,7 +64,7 @@ class SemesterGroup(models.Model):
     semester = models.CharField(max_length=50)
 
     def __str__(self):
-        """Return model as course number"""
+        """Return string of semester"""
         return self.semester
 
 
@@ -84,5 +84,5 @@ class CourseItem(models.Model):
     semester_offered = JSONField(blank=True, null=True)
 
     def __str__(self):
-        """Return model as course number"""
+        """Return string of course subject and number"""
         return f"{self.course_subject}-{self.course_number}"

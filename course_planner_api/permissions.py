@@ -17,7 +17,7 @@ class UpdateSemesterGroup(BasePermission):
     """allows users to edit semester info"""
 
     def has_object_permission(self, request, view, obj):
-        """Check if user has permission to access a semester"""
+        """Check if user has permission to access a semester group"""
 
         if request.user.is_staff:
             return True

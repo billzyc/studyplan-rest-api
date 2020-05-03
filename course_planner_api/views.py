@@ -34,7 +34,7 @@ class UserLoginViewSet(ObtainAuthToken):
 
 
 class UserSemesterGroupViewSet(viewsets.ModelViewSet):
-    """Handles operations on semester info"""
+    """Handles operations on semester information"""
 
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.SemesterGroupSerializer
@@ -50,7 +50,7 @@ class UserSemesterGroupViewSet(viewsets.ModelViewSet):
         return query_set
 
     def perform_create(self, serializer):
-        """Set semester info for the logged in user"""
+        """Set semester information for the logged in user"""
         serializer.save(user_profile=self.request.user)
 
 
@@ -63,7 +63,7 @@ class UserCourseItemViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateCourseItem, IsAuthenticated)
 
     def get_queryset(self):
-        """Retrieves saved course info for logged in user"""
+        """Retrieves saved course information for logged in user"""
         queryset = self.queryset
         semester_query = self.request.query_params.get('semester_query')
         if self.request.user.is_staff:
@@ -74,7 +74,6 @@ class UserCourseItemViewSet(viewsets.ModelViewSet):
                     query_set = queryset.filter(
                         user_profile=self.request.user, semester_placement=None)
                 else:
-                    print(52)
                     query_set = queryset.filter(
                         user_profile=self.request.user, semester_placement=semester_query)
             else:
@@ -82,5 +81,5 @@ class UserCourseItemViewSet(viewsets.ModelViewSet):
         return query_set
 
     def perform_create(self, serializer):
-        """Set course info for the logged in user"""
+        """Set course information for the logged in user"""
         serializer.save(user_profile=self.request.user)
