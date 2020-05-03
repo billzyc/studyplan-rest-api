@@ -33,6 +33,27 @@ class UserLoginViewSet(ObtainAuthToken):
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
+class UserSemesterGroupViewSet(viewsets.ModelViewSet):
+    """Handles operations on semester info"""
+
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.SemesterGroupSerializer
+    queryset = models.SemesterGroup.objects.all()
+    permission_classes = (permissions.UpdateSemesterGroup, IsAuthenticated)
+
+    def get_queryset(self):
+        """Retrieves saved course info for logged in user"""
+        queryset = self.queryset
+        if self.request.user.is_staff:
+            return queryset
+        query_set = queryset.filter(user_profile=self.request.user)
+        return query_set
+
+    def perform_create(self, serializer):
+        """Set semester info for the logged in user"""
+        serializer.save(user_profile=self.request.user)
+
+
 class UserCourseItemViewSet(viewsets.ModelViewSet):
     """Handles operations on course list"""
 
@@ -46,9 +67,14 @@ class UserCourseItemViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         if self.request.user.is_staff:
             return queryset
-        query_set = queryset.filter(user_profile=self.request.user)
+        try:
+            query_set = queryset.filter(
+                user_profile=self.request.user, semester_placement__semester__contains=self.request.data["semester_query"])
+        except KeyError:
+            query_set = queryset.filter(
+                user_profile=self.request.user)
         return query_set
 
     def perform_create(self, serializer):
-        """Set course info fpr the logged in user"""
+        """Set course info for the logged in user"""
         serializer.save(user_profile=self.request.user)

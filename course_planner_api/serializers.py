@@ -40,6 +40,19 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
+class SemesterGroupSerializer(serializers.ModelSerializer):
+    """Serializers course information"""
+
+    class Meta:
+        model = models.SemesterGroup
+        fields = (
+            "id",
+            "user_profile",
+            "semester",
+        )
+        extra_kwargs = {"user_profile": {"read_only": True}}
+
+
 class CourseItemSerializer(serializers.ModelSerializer):
     """Serializers course information"""
 
@@ -50,7 +63,7 @@ class CourseItemSerializer(serializers.ModelSerializer):
             "user_profile",
             "course_subject",
             "course_number",
-            "term_placement",
+            "semester_placement",
             "reqs",
             "semester_offered",
         )

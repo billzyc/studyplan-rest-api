@@ -54,15 +54,32 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
+class SemesterGroup(models.Model):
+    """Database model for semester"""
+
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+    )
+
+    semester = models.CharField(max_length=10)
+
+    def __str__(self):
+        """Return model as course number"""
+        return self.semester
+
+
 class CourseItem(models.Model):
     """Database model for course items"""
 
     user_profile = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
     )
+
+    semester_placement = models.ForeignKey(
+        SemesterGroup, on_delete=models.CASCADE, blank=True, null=True
+    )
     course_subject = models.CharField(max_length=10)
     course_number = models.IntegerField()
-    term_placement = models.CharField(max_length=10, blank=True, null=True)
     reqs = JSONField(blank=True, null=True)
     semester_offered = JSONField(blank=True, null=True)
 

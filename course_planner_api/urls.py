@@ -7,6 +7,7 @@ from course_planner_api import views
 router = DefaultRouter()
 router.register("profile", views.UserProfileViewSet)
 router.register("course-items", views.UserCourseItemViewSet)
+router.register("semesters", views.UserSemesterGroupViewSet)
 
 urlpatterns = [
     path("login/", views.UserLoginViewSet.as_view()),
