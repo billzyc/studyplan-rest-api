@@ -61,7 +61,22 @@ class SemesterGroup(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
     )
 
-    semester = models.CharField(max_length=50)
+    semester = models.CharField(max_length=12)
+
+    def getSemesterCode(self):
+        """Return int course code following waterloo open data api term structure https://github.com/uWaterloo/api-documentation/blob/master/v2/terms/list.md"""
+        semester = self.semester.strip().upper()
+        semester_term = "1"
+        if 'WINTER' in semester:
+            semester_term = "5"
+        elif 'SPRING' in semester:
+            semester_term = "9"
+        semester_year_list = ['1']
+        parsed_year_list = [s for s in semester if s.isdigit()]
+        print(semester_term)
+        semester_year_list = semester_year_list + parsed_year_list[2:]
+        semester_year = "".join(semester_year_list)
+        return int(semester_year+semester_term)
 
     def __str__(self):
         """Return string of semester"""

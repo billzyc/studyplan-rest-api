@@ -42,6 +42,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class SemesterGroupSerializer(serializers.ModelSerializer):
     """Serializes a semester"""
+    semester_code = serializers.SerializerMethodField()
+
+    def get_semester_code(self, obj):
+        return obj.getSemesterCode()
 
     class Meta:
         model = models.SemesterGroup
@@ -49,6 +53,7 @@ class SemesterGroupSerializer(serializers.ModelSerializer):
             "id",
             "user_profile",
             "semester",
+            "semester_code"
         )
         extra_kwargs = {"user_profile": {"read_only": True}}
 
