@@ -1,5 +1,5 @@
-# API for Course users
-Visit browsable API at http://ec2-18-188-30-63.us-east-2.compute.amazonaws.com/api/
+# My Study Plan
+https://mystudyplan.netlify.app/
 
 Back-end REST API created with Django and Django RFW to handle user information including login, course information and saved courses.
 
